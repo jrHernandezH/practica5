@@ -5,17 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario de registro- Mi web</title>
     <style>
         body {
             background: hsla(140, 85%, 47%, 0.336);
-            margin: 0
+            margin: 0;
+            padding: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            background-color: #eee;
+            /* color de fondo del scrollbar */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #1abc9c;
+            /* color del scrollbar */
         }
 
         .container {
             width: 100%;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -30,7 +43,9 @@
             max-width: calc(100vw - 40px);
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
-            position: relative
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         h2 {
@@ -82,7 +97,8 @@
             background: 0;
             color: #5a5a6e;
             cursor: pointer;
-            transition: all .3s
+            transition: all .3s;
+            border-radius: 10px;
         }
 
         .btn:hover {
@@ -113,28 +129,164 @@
         span {
             margin: 0px;
         }
+
+
+        /* Estilo para el select */
+        select {
+            display: block;
+            font-size: 12px;
+            padding: 5px 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #333;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        /* Estilo para las opciones */
+        select option {
+            font-size: 14px;
+            font-weight: normal;
+            padding: 5px 10px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        /* Estilo para la opción seleccionada */
+        select option:checked {
+            background-color: #eee;
+        }
+
+        input[type="checkbox"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+
+        input[type="checkbox"]:before {
+            content: "";
+            width: 10px;
+            height: 5px;
+            border-bottom: 3px solid #000;
+            border-left: 3px solid #000;
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -5px;
+            margin-left: -8px;
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+        }
+
+        input[type="checkbox"]:checked:before {
+            opacity: .6;
+        }
+
+        .radio-group label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .radio-label {
+            margin-left: 10px;
+            font-size: 13px;
+            color: #78788c;
+        }
+
+        .radio-group input[type="radio"]+.radio-label:before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .radio-group input[type="radio"]:checked+.radio-label:before {
+            background-color: #1abc9c;
+            border-color: #1abc9c;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <form class="form" action="POST">
-            <h2>Contactanos!!</h2>
-            <label type="Nombre:"><input placeholder="Escribe tu nombre aquí.." required></input></label>
-            <label type="Email:"><input placeholder="Email para que te contactemos.." required></input></label>
+        <form class="form" action="GET">
+            <h2>Formulario de registro <i>Mi web</i></h2>
+            <label type="Nombre:"><input placeholder="Escribe tu nombre aquí.." required maxlength="50"></input></label>
+            <label type="Apellido Paterno:"><input placeholder="Escribe tu nombre aquí.." required
+                    maxlength="50"></input></label>
+            <label type="Apellido Materno:"><input placeholder="Escribe tu nombre aquí.." required
+                    maxlength="50"></input></label>
+            <!--Radio-->
+            <label id="sexo" type="Sexo:">
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="radio" value="Hombre">
+                        <span class="radio-label">Hombre</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="radio" value="Mujer">
+                        <span class="radio-label">Mujer</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="radio" value="indfinido">
+                        <span class="radio-label">Indefinido</span>
+                    </label>
+                </div>
+            </label>
+            <label for="frutas" type="Poblacion">
+                <select id="frutas" name="frutas">
+                    <option value="orizaba">Orizaba</option>
+                    <option value="cordoba">Cordoba</option>
+                    <option value="xalapa">Xalapa</option>
+                    <option value="veracruz">Veracruz</option>
+                </select>
+            </label>
+            <label type="Email:"><input type="text" placeholder="Email para que te contactemos.."
+                    required></input></label>
             <label type="Mensage:"><input placeholder="Que deseas saber.." required></input></label>
+            <!--Verificacion-->
+            <label type="Deseo recibir informacion sobre novedades y ofertas"><input type="checkbox"
+                    checked></input></label>
+            <label
+                type="Declaro haber leido y aceptar las condiciones generales del programa y la normativa sobre la proteccion de datos"><input
+                    type="checkbox"></input></label>
             <div class="btn-wrap">
                 <input type="submit" class="btn">
             </div>
-            <div class="contact">
-                <p>
-                    001 1023 567
-                </p>
-                <p>
-                    contact@gmail.com
-                </p>
-            </div>
         </form>
+        <div class="contact">
+            <p>
+                272 234 ****
+            </p>
+            <p>
+                maxconm***@gmail.com
+            </p>
+        </div>
     </div>
 </body>
 </div>
